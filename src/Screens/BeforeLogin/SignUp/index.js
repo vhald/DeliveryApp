@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet,
   Text,
-  SafeAreaView,
   View,
   Image,
   Button,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {TextInput} from 'react-native-paper';
 import {
@@ -23,11 +22,13 @@ import {
   Unselect,
   FaceBook,
   Google,
-  // FaceBook,
-  // Google,
 } from '../../../Utils/images';
+// import {validName, validEmail, validPassword} from '../../../Utils/validator';
+import {useNavigation} from '@react-navigation/native';
 
-function SignUpScreen({navigation, route, params}) {
+function SignUpScreen() {
+  const navigation = useNavigation;
+
   const [state, setState] = useState({
     fullName: '',
     email: '',
@@ -48,18 +49,20 @@ function SignUpScreen({navigation, route, params}) {
     setState(prev => ({...prev, password: text}));
   };
 
-  const submitForm = () => {
-    const fullName = String(state.fullName).trim().toLowerCase();
-    const fullname_test = fullName.length > 2;
-    if (fullName.length === 0) {
+  const validName = name => {
+    // import these in validator.js
+    const fullName = String(name).trim().toLowerCase();
+    const fullname_test = fullName.length < 6;
+    if (fullname_test) {
       setState(prev => ({...prev, fullNameTestFail: true}));
       return;
     } else {
       setState(prev => ({...prev, fullNameTestFail: false}));
     }
+  };
 
-    // email validation starts here //
-    const email = String(state.email).trim().toLowerCase();
+  const validEmail = emailId => {
+    const email = String(emailId).trim().toLowerCase();
     const pattern =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     var email_test = pattern.test(email); // true , false
@@ -70,20 +73,24 @@ function SignUpScreen({navigation, route, params}) {
     if (email_test) {
       setState(prev => ({...prev, emailTestFail: false}));
     }
+  };
 
-    // password validation starts here //
-    const password = String(state.password).trim();
+  const validPassword = pass => {
+    const password = String(pass).trim();
     if (password.length >= 6) {
       setState(prev => ({...prev, passwordTestFail: false}));
     } else {
       setState(prev => ({...prev, passwordTestFail: true}));
       return;
     }
-    // navigation.navigate('Login')
+  };
+
+  const submitForm = () => {
+    // navigation.navigate('Login');
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.Group}>
         <Group style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
@@ -91,46 +98,37 @@ function SignUpScreen({navigation, route, params}) {
           <Text style={styles.GroupText}>
             Create a free account and join us!
           </Text>
-          <View
-            style={{
-              justifyContent: 'space-around',
-              height: hp(28),
-              marginTop: 5,
-            }}>
+          <View style={styles.InputFeild}>
             <TextInput
               mode="outlined"
               label="Your Name"
               placeholder="Enter your Name"
               onChangeText={text => onChangeName(text)}
-              value={state.fullname}
-              activeOutlineColor={false ? '#1977F3' : '#D70F0F'} // make it dynamic
+              value={state.fullName}
+              activeOutlineColor={true ? '#1977F3' : '#D70F0F'} // make it dynamic
               outlineStyle={{borderRadius: 10}}
               placeholderTextColor="#B9B9B9"
-              style={{height: 40}}
-
-              // outlineStyle={{ when validation false -> red}}
+              onBlur={() => validName(state.fullName)}
             />
-            {/* {state.fullnameTestFail === true && ( */}
-            <Text style={{color: 'red', fontSize: 10, paddingLeft: 10}}>
-              invalid name. Min 3 characters required
-            </Text>
-            {/* )} */}
+            {state.fullNameTestFail === true && (
+              <Text style={styles.invalidMsg}>
+                Invalid Name! Min 6 characters required.
+              </Text>
+            )}
             <TextInput
               mode="outlined"
               label="Email"
               placeholder="Enter your e-mail"
               onChangeText={text => onChangeEmail(text)}
               value={state.email}
-              activeOutlineColor="#1977F3"
+              activeOutlineColor={true ? '#1977F3' : '#D70F0F'} // make it dynamic
               outlineStyle={{borderRadius: 10}}
               placeholderTextColor="#B9B9B9"
-              style={{height: 40}}
+              onBlur={() => validEmail(state.email)}
             />
-            {/* {state.emailTestFail === true && ( */}
-            <Text style={{color: 'red', fontSize: 10, paddingLeft: 10}}>
-              invalid email
-            </Text>
-            {/* )} */}
+            {state.emailTestFail === true && (
+              <Text style={styles.invalidMsg}>invalid email</Text>
+            )}
             <TextInput
               mode="outlined"
               label="Password"
@@ -142,19 +140,18 @@ function SignUpScreen({navigation, route, params}) {
               outlineStyle={{
                 borderRadius: 10,
               }}
-              activeOutlineColor="#1977F3"
+              // secureTextEntry={true}
+              activeOutlineColor={true ? '#1977F3' : '#D70F0F'} // make it dynamic
               placeholderTextColor="#B9B9B9"
-              style={{height: 40, justifyContent: 'center'}}
+              onBlur={() => validPassword(state.password)}
             />
-            {/* {state.emailTestFail === true && ( */}
-            <Text style={{color: 'red', fontSize: 10, paddingLeft: 10}}>
-              invalid password
-            </Text>
-            {/* )} */}
+            {state.emailTestFail === true && (
+              <Text style={styles.invalidMsg}>invalid password</Text>
+            )}
           </View>
           <View style={styles.Checkbox}>
             {false ? <Select /> : <Unselect />}
-            <Text style={{fontFamily: 'Lato-Regular', marginLeft: 9}}>
+            <Text style={styles.Consent}>
               By creating an account you agree with all our{'\n '}
               <Text style={styles.TextLink}>Terms of Service</Text> and our{' '}
               <Text style={styles.TextLink}>Privacy Policy</Text>.
@@ -163,48 +160,12 @@ function SignUpScreen({navigation, route, params}) {
           <TouchableOpacity onPress={submitForm}>
             <CreateButton />
           </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              width: wp(50),
-              alignSelf: 'center',
-              marginTop: 20,
-              color: '#B9B9B9',
-            }}>
-            <View
-              style={{
-                width: 40,
-                height: 0,
-                borderWidth: 0.5,
-                borderColor: '#B9B9B9',
-              }}
-            />
-            <Text
-              style={{
-                color: '#555252',
-                fontFamily: 'Lato-Regular',
-                fontSize: 12,
-                bottom: 8,
-              }}>
-              Or Sign up With
-            </Text>
-            <View
-              style={{
-                width: 40,
-                height: 0,
-                borderWidth: 0.5,
-                borderColor: '#B9B9B9',
-              }}
-            />
+          <View style={styles.Division}>
+            <View style={styles.ThinLine} />
+            <Text style={styles.DivisionText}>Or Sign up With</Text>
+            <View style={styles.ThinLine} />
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              // backgroundColor: 'yellow',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
+          <View style={styles.socialButton}>
             <TouchableOpacity>
               <Google width={wp(40)} />
             </TouchableOpacity>
@@ -212,19 +173,12 @@ function SignUpScreen({navigation, route, params}) {
               <FaceBook width={wp(40)} />
             </TouchableOpacity>
           </View>
-          <Text
-            style={{
-              fontFamily: 'Lato-Regular',
-              color: '#818181',
-              fontSize: 12,
-              alignSelf: 'center',
-              marginTop: hp(3),
-            }}>
+          <Text style={styles.OtherOption}>
             Already have an Account? <Text style={styles.TextLink}>Login</Text>
           </Text>
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 
