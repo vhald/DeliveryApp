@@ -9,3 +9,5 @@ export {default as Select} from '../Assets/icons/Select.svg';
 export {default as Unselect} from '../Assets/icons/Unselect.svg';
 export {default as FaceBook} from '../Assets/icons/Facebook.svg';
 export {default as Google} from '../Assets/icons/Google.svg';
+export {default as Circleone} from '../Assets/icons/Circleone.svg';
+export {default as Circletwo} from '../Assets/icons/Circletwo.svg';

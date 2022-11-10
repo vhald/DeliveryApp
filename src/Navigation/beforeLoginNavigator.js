@@ -3,8 +3,8 @@ import {View, Text} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from '../Screens/BeforeLogin/Login';
 import SignUpScreen from '../Screens/BeforeLogin/SignUp';
-import Slider from '../Screens/BeforeLogin/GetStarted';
-
+import WelcomeScreen from '../Screens/BeforeLogin/GetStarted';
+import ForgotScreen from '../Screens/BeforeLogin/ForgotPassword';
 const BeforeLoginStack = createNativeStackNavigator();
 function BeforeLoginNavigator(props) {
   return (
@@ -12,10 +12,11 @@ function BeforeLoginNavigator(props) {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={SignUpScreen}>
-      {/* <BeforeLoginStack.Screen name="SplashScreen" component={Slider} /> */}
+      initialRouteName={WelcomeScreen}>
+      <BeforeLoginStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
       {/* <BeforeLoginStack.Screen name="LoginInScreen" component={LoginScreen} /> */}
       <BeforeLoginStack.Screen name="SignUpScreen" component={SignUpScreen} />
+      <BeforeLoginStack.Screen name="ForgotScreen" component={ForgotScreen} />
     </BeforeLoginStack.Navigator>
   );
 }
