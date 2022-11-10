@@ -1,4 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   StyleSheet,
@@ -15,12 +16,20 @@ import {
 } from 'react-native-responsive-screen';
 import styles from './styles';
 
-function CreateButton() {
+const CreateButton = () => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.Button}>
-      <Text style={styles.ButtonText}>Create Account</Text>
+    <View>
+      <TouchableOpacity
+        style={styles.Button}
+        onPress={() => navigation.navigate('SignUpScreen')}>
+        <Text style={styles.ButtonText}>Create New Account</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.Button2}>
+        <Text style={styles.ButtonText2}>Skip</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 export default CreateButton;
