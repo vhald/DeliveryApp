@@ -20,7 +20,16 @@ import { useNavigation } from "@react-navigation/native";
 
 function NewPassword() {
   const navigation = useNavigation();
-  const [state, setState] = useState({
+
+  interface stateprops {
+    password: string;
+    passwordConfirm: string;
+    passwordHidden: boolean;
+    emailTestFail: boolean | null;
+    passwordTestFail: boolean | null;
+  }
+
+  const [state, setState] = useState<stateprops>({
     password: "",
     passwordConfirm: "",
     passwordHidden: false,
@@ -28,35 +37,11 @@ function NewPassword() {
     passwordTestFail: null,
   });
 
-  const onChangePassword = text => {
+  const onChangePassword = (text: string) => {
     setState(prev => ({ ...prev, password: text }));
   };
-  const onChangePassConfirm = text => {
+  const onChangePassConfirm = (text: string) => {
     setState(prev => ({ ...prev, passwordConfirm: text }));
-  };
-
-  // const validEmail = emailId => {
-  //   const email = String(emailId).trim().toLowerCase();
-  //   const pattern =
-  //     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-  //   var email_test = pattern.test(email); // true , false
-  //   if (email_test === false) {
-  //     setState(prev => ({ ...prev, emailTestFail: true }));
-  //     return;
-  //   }
-  //   if (email_test) {
-  //     setState(prev => ({ ...prev, emailTestFail: false }));
-  //   }
-  // };
-
-  const validPassword = pass => {
-    const password = String(pass).trim();
-    if (password.length >= 6) {
-      setState(prev => ({ ...prev, passwordTestFail: false }));
-    } else {
-      setState(prev => ({ ...prev, passwordTestFail: true }));
-      return;
-    }
   };
 
   const submitForm = () => {
@@ -65,7 +50,7 @@ function NewPassword() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.Group}>
+      <View>
         <NewPass style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
           <Text style={styles.SignUpText}>Create New Password</Text>
@@ -79,7 +64,7 @@ function NewPassword() {
               label="New Password"
               placeholder="Create Password"
               onChangeText={text => onChangePassword(text)}
-              value={state.email}
+              value={state.password}
               activeOutlineColor="#1977F3"
               outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
@@ -89,7 +74,7 @@ function NewPassword() {
               label="Confirm Password"
               placeholder="Re-enter Password"
               onChangeText={text => onChangePassConfirm(text)}
-              value={state.password}
+              value={state.passwordConfirm}
               outlineStyle={{ borderRadius: 10 }}
               activeOutlineColor="#1977F3"
               placeholderTextColor="#B9B9B9"

@@ -39,7 +39,7 @@ export default StyleSheet.create({
     color: "#818181",
     fontSize: 12,
     alignSelf: "center",
-    marginTop: hp(3),
+    marginTop: hp(5),
   },
   socialButton: {
     flexDirection: "row",

@@ -29,9 +29,19 @@ import { useNavigation } from "@react-navigation/native";
 const SignUpScreen = () => {
   const navigation = useNavigation();
 
+  interface stateprops {
+    fullName: string;
+    email: string;
+    password: string;
+    passwordHidden: boolean;
+    fullNameTestFail: boolean | null;
+    emailTestFail: boolean | null;
+    passwordTestFail: boolean | null;
+  }
+
   const [toggle, setToggle] = useState(true);
   const [check, setCheck] = useState(true);
-  const [state, setState] = useState({
+  const [state, setState] = useState<stateprops>({
     fullName: "",
     email: "",
     password: "",
@@ -41,13 +51,13 @@ const SignUpScreen = () => {
     passwordTestFail: null,
   });
 
-  const onChangeName = text => {
+  const onChangeName = (text: string) => {
     setState(prev => ({ ...prev, fullName: text }));
   };
-  const onChangeEmail = text => {
+  const onChangeEmail = (text: string) => {
     setState(prev => ({ ...prev, email: text }));
   };
-  const onChangePassword = text => {
+  const onChangePassword = (text: string) => {
     setState(prev => ({ ...prev, password: text }));
   };
 
@@ -59,8 +69,7 @@ const SignUpScreen = () => {
     setCheck(!check);
   };
 
-  const validName = name => {
-    // import these in validator.js
+  const validName = (name: string) => {
     const fullName = String(name).trim().toLowerCase();
     const fullname_test = fullName.length < 6;
     if (fullname_test) {
@@ -71,7 +80,7 @@ const SignUpScreen = () => {
     }
   };
 
-  const validEmail = emailId => {
+  const validEmail = (emailId: string) => {
     const email = String(emailId).trim().toLowerCase();
     const pattern =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -85,7 +94,7 @@ const SignUpScreen = () => {
     }
   };
 
-  const validPassword = pass => {
+  const validPassword = (pass: string) => {
     const password = String(pass).trim();
     if (password.length >= 6) {
       setState(prev => ({ ...prev, passwordTestFail: false }));
@@ -101,7 +110,7 @@ const SignUpScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.Group}>
+      <View>
         <Group style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
           <Text style={styles.SignUpText}>Sign Up</Text>
@@ -152,9 +161,7 @@ const SignUpScreen = () => {
               }
               onChangeText={text => onChangePassword(text)}
               value={state.password}
-              outlineStyle={{
-                borderRadius: 10,
-              }}
+              outlineStyle={{ borderRadius: 10 }}
               secureTextEntry={toggle}
               activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
               placeholderTextColor="#B9B9B9"
@@ -190,9 +197,12 @@ const SignUpScreen = () => {
               <FaceBook width={wp(40)} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.OtherOption}>
-            Already have an Account? <Text style={styles.TextLink}>Login</Text>
-          </Text>
+          <TouchableOpacity>
+            <Text style={styles.OtherOption}>
+              Already have an Account?{" "}
+              <Text style={styles.TextLink}>Login</Text>
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

@@ -13,7 +13,7 @@ import OtpFeild from "../../../Components/OtpFeilds";
 const OtpScreen = () => {
   const [state, setState] = useState({});
 
-  const onChangeEmail = text => {
+  const onChangeEmail = (text: any) => {
     setState(prev => ({ ...prev, email: text }));
   };
 
@@ -23,7 +23,7 @@ const OtpScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.Group}>
+      <View>
         <Otp style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
           <Text style={styles.SignUpText}>OTP Verification</Text>

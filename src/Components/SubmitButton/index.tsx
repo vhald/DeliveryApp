@@ -14,7 +14,7 @@ import {
 } from "react-native-responsive-screen";
 import styles from "./styles";
 
-const SubmitButton = prop => {
+const SubmitButton = (prop: { name: string }) => {
   const name = prop.name;
 
   return (

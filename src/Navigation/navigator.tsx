@@ -12,12 +12,12 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import BeforeLoginNavigator from "./beforeLoginNavigator";
 
-function Navigator() {
+const Navigator = () => {
   return (
     <NavigationContainer>
       <BeforeLoginNavigator />
     </NavigationContainer>
   );
-}
+};
 
 export default Navigator;

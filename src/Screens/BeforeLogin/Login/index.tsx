@@ -21,7 +21,15 @@ import { useNavigation } from "@react-navigation/native";
 const LoginScreen = () => {
   const navigation = useNavigation();
 
-  const [state, setState] = useState({
+  interface stateprops {
+    email: string;
+    password: string;
+    passwordHidden: boolean;
+    emailTestFail: boolean | null;
+    passwordTestFail: boolean | null;
+  }
+
+  const [state, setState] = useState<stateprops>({
     email: "",
     password: "",
     passwordHidden: false,
@@ -29,18 +37,14 @@ const LoginScreen = () => {
     passwordTestFail: null,
   });
 
-  const onChangeEmail = text => {
+  const onChangeEmail = (text: string) => {
     setState(prev => ({ ...prev, email: text }));
   };
-  const onChangePassword = text => {
+  const onChangePassword = (text: string) => {
     setState(prev => ({ ...prev, password: text }));
   };
 
-  const validEmail = emailId => {
-    const email = String(emailId).trim().toLowerCase();
-    const pattern =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    var email_test = pattern.test(email); // true , false
+  const emailValidation = (email_test: any) => {
     if (email_test === false) {
       setState(prev => ({ ...prev, emailTestFail: true }));
       return;
@@ -50,7 +54,7 @@ const LoginScreen = () => {
     }
   };
 
-  const validPassword = pass => {
+  const passwordValidation = (pass: (pass: any) => void) => {
     const password = String(pass).trim();
     if (password.length >= 6) {
       setState(prev => ({ ...prev, passwordTestFail: false }));
@@ -66,7 +70,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.Group}>
+      <View>
         <Login style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
           <Text style={styles.SignUpText}>Log In</Text>
@@ -80,14 +84,16 @@ const LoginScreen = () => {
               placeholder="Enter your e-mail"
               onChangeText={text => onChangeEmail(text)}
               value={state.email}
+              outlineColor="#B9B9B9"
               activeOutlineColor="#1977F3"
               outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
-              onBlur={() => validName(state.email)}
+              onBlur={() => emailValidation(validEmail)}
+              textColor="#373737"
             />
-            {/* {state.emailTestFail === true && ( */}
-            <Text style={styles.invalidPop}>invalid email</Text>
-            {/* )} */}
+            {state.emailTestFail === true && (
+              <Text style={styles.invalidPop}>invalid email</Text>
+            )}
             <TextInput
               mode="outlined"
               label="Password"
@@ -97,13 +103,15 @@ const LoginScreen = () => {
               value={state.password}
               secureTextEntry={state.passwordHidden}
               outlineStyle={{ borderRadius: 10 }}
+              outlineColor="#B9B9B9"
               activeOutlineColor="#1977F3"
               placeholderTextColor="#B9B9B9"
-              onBlur={() => validName(state.password)}
+              textColor="#373737"
+              onBlur={() => passwordValidation(validPassword)}
             />
-            {/* {state.emailTestFail === true && ( */}
-            <Text style={styles.invalidPop}>invalid password</Text>
-            {/* )} */}
+            {state.passwordTestFail === true && (
+              <Text style={styles.invalidPop}>invalid password</Text>
+            )}
           </View>
           <View style={styles.Checkbox}>
             <Text style={styles.Forget}>Forgot Password?</Text>
