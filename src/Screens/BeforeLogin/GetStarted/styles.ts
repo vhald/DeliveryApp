@@ -14,11 +14,7 @@ export default StyleSheet.create({
     margin: wp('15%'),
     //borderWidth: 1,
   },
-  WelcomeImage: {
-    width: wp(273.49),
-    height: hp(163.08),
-    //paddingTop: hp(50.75),
-  },
+
   WelcomeText: {
     alignContent: 'center',
     alignItems: 'center',
@@ -65,10 +61,11 @@ export default StyleSheet.create({
   },
   circle1: {
     marginLeft: wp(8),
+    marginTop: hp(2),
   },
   circle2: {
     marginLeft: wp(-14.5),
-    marginTop: hp(9),
+    marginTop: hp(11),
   },
   BottomText: {
     alignItems: 'center',
