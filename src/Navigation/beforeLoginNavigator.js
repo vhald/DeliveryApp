@@ -18,9 +18,9 @@ function BeforeLoginNavigator(props) {
       initialRouteName={SignUpScreen}>
       {/* <BeforeLoginStack.Screen name="SplashScreen" component={Slider} /> */}
       {/* <BeforeLoginStack.Screen name="LoginInScreen" component={LoginScreen} /> */}
-      <BeforeLoginStack.Screen name="SignUpScreen" component={SignUpScreen} />
+      {/* <BeforeLoginStack.Screen name="SignUpScreen" component={SignUpScreen} /> */}
       <BeforeLoginStack.Screen name="OtpScreen" component={OtpScreen} />
-      <BeforeLoginStack.Screen name="NewPassword" component={NewPassword} />
+      {/* <BeforeLoginStack.Screen name="NewPassword" component={NewPassword} /> */}
     </BeforeLoginStack.Navigator>
   );
 }

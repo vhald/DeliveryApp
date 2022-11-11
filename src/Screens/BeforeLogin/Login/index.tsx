@@ -16,8 +16,11 @@ import styles from "./styles";
 import { Login, Hide, Show, FaceBook, Google } from "../../../Utils/images";
 import { validEmail, validPassword } from "../../../Utils/validator";
 import SubmitButton from "../../../Components/SubmitButton";
+import { useNavigation } from "@react-navigation/native";
 
-function LoginScreen({ navigation, route, params }) {
+const LoginScreen = () => {
+  const navigation = useNavigation();
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -128,6 +131,6 @@ function LoginScreen({ navigation, route, params }) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default LoginScreen;

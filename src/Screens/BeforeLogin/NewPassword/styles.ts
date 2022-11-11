@@ -79,4 +79,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     marginTop: hp(8),
   },
+  submit: {
+    marginTop: hp(5),
+  },
 });
