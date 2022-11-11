@@ -17,7 +17,7 @@ import { Login, Hide, Show, FaceBook, Google } from "../../../Utils/images";
 import { validEmail, validPassword } from "../../../Utils/validator";
 import SubmitButton from "../../../Components/SubmitButton";
 
-function LoginScreen({ navigation, route, params }) {
+function NewPassword({ navigation, route, params }) {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -66,7 +66,7 @@ function LoginScreen({ navigation, route, params }) {
       <View style={styles.Group}>
         <Login style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
-          <Text style={styles.SignUpText}>Log In</Text>
+          <Text style={styles.SignUpText}>Create New Password</Text>
           <Text style={styles.GroupText}>
             Enter registered e-mail & password to login your account
           </Text>
@@ -130,4 +130,4 @@ function LoginScreen({ navigation, route, params }) {
   );
 }
 
-export default LoginScreen;
+export default NewPassword;

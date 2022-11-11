@@ -5,10 +5,10 @@ export const validName = name => {
   const fullName = String(name).trim().toLowerCase();
   const fullname_test = fullName.length < 6;
   if (fullname_test) {
-    setState(prev => ({...prev, fullNameTestFail: true}));
+    setState(prev => ({ ...prev, fullNameTestFail: true }));
     return;
   } else {
-    setState(prev => ({...prev, fullNameTestFail: false}));
+    setState(prev => ({ ...prev, fullNameTestFail: false }));
   }
 };
 
@@ -18,20 +18,20 @@ export const validEmail = emailId => {
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   var email_test = pattern.test(email); // true , false
   if (email_test === false) {
-    setState(prev => ({...prev, emailTestFail: true}));
+    setState(prev => ({ ...prev, emailTestFail: true }));
     return;
   }
   if (email_test) {
-    setState(prev => ({...prev, emailTestFail: false}));
+    setState(prev => ({ ...prev, emailTestFail: false }));
   }
 };
 
 export const validPassword = pass => {
   const password = String(pass).trim();
   if (password.length >= 6) {
-    setState(prev => ({...prev, passwordTestFail: false}));
+    setState(prev => ({ ...prev, passwordTestFail: false }));
   } else {
-    setState(prev => ({...prev, passwordTestFail: true}));
+    setState(prev => ({ ...prev, passwordTestFail: true }));
     return;
   }
 };

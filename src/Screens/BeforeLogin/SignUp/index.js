@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -6,14 +6,14 @@ import {
   Button,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
-import {TextInput} from 'react-native-paper';
+} from "react-native";
+import { TextInput } from "react-native-paper";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import styles from './styles';
-import CreateButton from '../../../Components/CreateButton';
+} from "react-native-responsive-screen";
+import styles from "./styles";
+import SubmitButton from "../../../Components/SubmitButton";
 import {
   Group,
   Hide,
@@ -22,17 +22,17 @@ import {
   Unselect,
   FaceBook,
   Google,
-} from '../../../Utils/images';
+} from "../../../Utils/images";
 // import {validName, validEmail, validPassword} from '../../../Utils/validator';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-function SignUpScreen() {
+const SignUpScreen = () => {
   const navigation = useNavigation;
 
   const [state, setState] = useState({
-    fullName: '',
-    email: '',
-    password: '',
+    fullName: "",
+    email: "",
+    password: "",
     passwordHidden: false,
     fullNameTestFail: null,
     emailTestFail: null,
@@ -40,13 +40,13 @@ function SignUpScreen() {
   });
 
   const onChangeName = text => {
-    setState(prev => ({...prev, fullName: text}));
+    setState(prev => ({ ...prev, fullName: text }));
   };
   const onChangeEmail = text => {
-    setState(prev => ({...prev, email: text}));
+    setState(prev => ({ ...prev, email: text }));
   };
   const onChangePassword = text => {
-    setState(prev => ({...prev, password: text}));
+    setState(prev => ({ ...prev, password: text }));
   };
 
   const validName = name => {
@@ -54,10 +54,10 @@ function SignUpScreen() {
     const fullName = String(name).trim().toLowerCase();
     const fullname_test = fullName.length < 6;
     if (fullname_test) {
-      setState(prev => ({...prev, fullNameTestFail: true}));
+      setState(prev => ({ ...prev, fullNameTestFail: true }));
       return;
     } else {
-      setState(prev => ({...prev, fullNameTestFail: false}));
+      setState(prev => ({ ...prev, fullNameTestFail: false }));
     }
   };
 
@@ -67,20 +67,20 @@ function SignUpScreen() {
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     var email_test = pattern.test(email); // true , false
     if (email_test === false) {
-      setState(prev => ({...prev, emailTestFail: true}));
+      setState(prev => ({ ...prev, emailTestFail: true }));
       return;
     }
     if (email_test) {
-      setState(prev => ({...prev, emailTestFail: false}));
+      setState(prev => ({ ...prev, emailTestFail: false }));
     }
   };
 
   const validPassword = pass => {
     const password = String(pass).trim();
     if (password.length >= 6) {
-      setState(prev => ({...prev, passwordTestFail: false}));
+      setState(prev => ({ ...prev, passwordTestFail: false }));
     } else {
-      setState(prev => ({...prev, passwordTestFail: true}));
+      setState(prev => ({ ...prev, passwordTestFail: true }));
       return;
     }
   };
@@ -105,8 +105,8 @@ function SignUpScreen() {
               placeholder="Enter your Name"
               onChangeText={text => onChangeName(text)}
               value={state.fullName}
-              activeOutlineColor={true ? '#1977F3' : '#D70F0F'} // make it dynamic
-              outlineStyle={{borderRadius: 10}}
+              activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
+              outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
               onBlur={() => validName(state.fullName)}
             />
@@ -121,8 +121,8 @@ function SignUpScreen() {
               placeholder="Enter your e-mail"
               onChangeText={text => onChangeEmail(text)}
               value={state.email}
-              activeOutlineColor={true ? '#1977F3' : '#D70F0F'} // make it dynamic
-              outlineStyle={{borderRadius: 10}}
+              activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
+              outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
               onBlur={() => validEmail(state.email)}
             />
@@ -133,15 +133,16 @@ function SignUpScreen() {
               mode="outlined"
               label="Password"
               placeholder="Create Password"
-              right={<TextInput.Icon icon={Show} />}
+              right={
+                <TextInput.Icon icon={state.passwordHidden ? Hide : Show} />
+              }
               onChangeText={text => onChangePassword(text)}
               value={state.password}
-              secureTextEntry={state.passwordHidden}
               outlineStyle={{
                 borderRadius: 10,
               }}
-              // secureTextEntry={true}
-              activeOutlineColor={true ? '#1977F3' : '#D70F0F'} // make it dynamic
+              secureTextEntry={state.passwordHidden}
+              activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
               placeholderTextColor="#B9B9B9"
               onBlur={() => validPassword(state.password)}
             />
@@ -152,13 +153,13 @@ function SignUpScreen() {
           <View style={styles.Checkbox}>
             {false ? <Select /> : <Unselect />}
             <Text style={styles.Consent}>
-              By creating an account you agree with all our{'\n '}
-              <Text style={styles.TextLink}>Terms of Service</Text> and our{' '}
+              By creating an account you agree with all our{"\n "}
+              <Text style={styles.TextLink}>Terms of Service</Text> and our{" "}
               <Text style={styles.TextLink}>Privacy Policy</Text>.
             </Text>
           </View>
           <TouchableOpacity onPress={submitForm}>
-            <CreateButton />
+            <SubmitButton name="Create Account" />
           </TouchableOpacity>
           <View style={styles.Division}>
             <View style={styles.ThinLine} />
@@ -180,6 +181,6 @@ function SignUpScreen() {
       </View>
     </ScrollView>
   );
-}
+};
 
 export default SignUpScreen;
