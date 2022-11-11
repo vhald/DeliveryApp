@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -8,9 +8,9 @@ import {
   Text,
   useColorScheme,
   View,
-} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import BeforeLoginNavigator from './beforeLoginNavigator';
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import BeforeLoginNavigator from "./beforeLoginNavigator";
 
 function Navigator() {
   return (

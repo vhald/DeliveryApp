@@ -7,10 +7,11 @@ import {
 export default StyleSheet.create({
   container: { flex: 1, backgroundColor: "white" },
   GroupImage: {
-    marginTop: hp(3),
+    marginTop: hp(6),
     alignSelf: "center",
   },
   content: {
+    marginTop: hp(2),
     width: wp(90),
     alignSelf: "center",
   },
@@ -55,7 +56,7 @@ export default StyleSheet.create({
   textFeild: {
     justifyContent: "space-around",
     height: hp(20),
-    marginTop: 5,
+    marginTop: hp(5),
   },
   GroupSubText: {
     fontWeight: "700",

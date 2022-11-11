@@ -27,8 +27,10 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
-  const navigation = useNavigation;
+  const navigation = useNavigation();
 
+  const [toggle, setToggle] = useState(true);
+  const [check, setCheck] = useState(true);
   const [state, setState] = useState({
     fullName: "",
     email: "",
@@ -47,6 +49,14 @@ const SignUpScreen = () => {
   };
   const onChangePassword = text => {
     setState(prev => ({ ...prev, password: text }));
+  };
+
+  const toggleFunction = () => {
+    setToggle(!toggle);
+  };
+
+  const toggleCheckbox = () => {
+    setCheck(!check);
   };
 
   const validName = name => {
@@ -86,7 +96,7 @@ const SignUpScreen = () => {
   };
 
   const submitForm = () => {
-    // navigation.navigate('Login');
+    // navigation.navigate("LoginScreen");
   };
 
   return (
@@ -125,6 +135,7 @@ const SignUpScreen = () => {
               outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
               onBlur={() => validEmail(state.email)}
+              keyboardType="email-address"
             />
             {state.emailTestFail === true && (
               <Text style={styles.invalidMsg}>invalid email</Text>
@@ -134,14 +145,17 @@ const SignUpScreen = () => {
               label="Password"
               placeholder="Create Password"
               right={
-                <TextInput.Icon icon={state.passwordHidden ? Hide : Show} />
+                <TextInput.Icon
+                  onPress={toggleFunction}
+                  icon={toggle ? Hide : Show}
+                />
               }
               onChangeText={text => onChangePassword(text)}
               value={state.password}
               outlineStyle={{
                 borderRadius: 10,
               }}
-              secureTextEntry={state.passwordHidden}
+              secureTextEntry={toggle}
               activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
               placeholderTextColor="#B9B9B9"
               onBlur={() => validPassword(state.password)}
@@ -151,7 +165,9 @@ const SignUpScreen = () => {
             )}
           </View>
           <View style={styles.Checkbox}>
-            {false ? <Select /> : <Unselect />}
+            <TouchableOpacity onPress={() => toggleCheckbox()}>
+              {check ? <Select /> : <Unselect />}
+            </TouchableOpacity>
             <Text style={styles.Consent}>
               By creating an account you agree with all our{"\n "}
               <Text style={styles.TextLink}>Terms of Service</Text> and our{" "}
