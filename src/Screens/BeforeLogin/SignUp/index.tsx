@@ -27,8 +27,7 @@ import {
   // FaceBook,
   // Google,
 } from '../../../Utils/images';
-
-function SignUpScreen({navigation, route, params}) {
+const SignUpScreen = () => {
   const [state, setState] = useState({
     fullName: '',
     email: '',
@@ -161,8 +160,29 @@ function SignUpScreen({navigation, route, params}) {
               <Text style={styles.TextLink}>Privacy Policy</Text>.
             </Text>
           </View>
-          <TouchableOpacity onPress={submitForm}>
-            <CreateButton />
+          <TouchableOpacity
+            onPress={submitForm}
+            style={{
+              width: wp('95%'),
+              height: hp('6%'),
+              alignItems: 'center',
+              marginLeft: wp(-2),
+              borderRadius: 10,
+              marginTop: hp(0),
+              backgroundColor: '#1977F3',
+            }}>
+            <Text
+              style={{
+                alignItems: 'center',
+                alignContent: 'center',
+                paddingTop: 14,
+                color: '#FFFFFF',
+                fontSize: 14,
+                lineHeight: 16.8,
+                fontFamily: 'Lato-Bold',
+              }}>
+              Create New Account
+            </Text>
           </TouchableOpacity>
           <View
             style={{
