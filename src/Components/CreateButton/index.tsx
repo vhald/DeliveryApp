@@ -1,9 +1,9 @@
-import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import styles from './styles';
-import {ButtonTypes} from '../../Model/types';
+import React from "react";
+import { Text, View, TouchableOpacity } from "react-native";
+import styles from "./styles";
+import { ButtonTypes } from "../../Model/types";
+import { useNavigation } from "@react-navigation/native";
 /**
- *
  * @param {props} onPress - onclick operation
  * @param {props} title - button title
  * @param {props} titleStyle - button title styles
@@ -15,28 +15,20 @@ import {ButtonTypes} from '../../Model/types';
  * @returns
  */
 
-const CreateButton = (props: ButtonTypes) => {
-  const {
-    onPress,
-    title,
-    titleStyle,
-    btnStyle,
-    rightIcon,
-    leftIcon,
-    rightIconStyle,
-    leftIconStyle,
-  } = props;
-
+const CreateButton = props => {
+  const onPress = props.onPress;
+  const navigation = useNavigation();
   return (
-    <View>
-      <TouchableOpacity style={styles.Button} onPress={onPress}>
+    <>
+      <TouchableOpacity
+        style={styles.Button}
+        onPress={() => navigation.navigate("SignUpScreen")}>
         <Text style={styles.ButtonText}>Create New Account</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.Button2}>
         <Text style={styles.ButtonText2}>Skip</Text>
       </TouchableOpacity>
-    </View>
+    </>
   );
 };
-
 export default CreateButton;

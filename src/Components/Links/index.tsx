@@ -1,7 +1,7 @@
-import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
-import styles from './styles';
-import {Google, FaceBook} from '../../Utils/images';
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
+import styles from "./styles";
+import { Google, FaceBook } from "../../Utils/images";
 const Links = () => {
   return (
     <View style={styles.container}>
