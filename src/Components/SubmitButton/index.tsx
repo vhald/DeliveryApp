@@ -14,13 +14,14 @@ import {
 } from "react-native-responsive-screen";
 import styles from "./styles";
 
-const SubmitButton = (prop: { name: string }) => {
+const SubmitButton = (prop: { onPress: any; name: string }) => {
   const name = prop.name;
+  const onPress = prop.onPress;
 
   return (
-    <View style={styles.Button}>
+    <TouchableOpacity style={styles.Button} onPress={onPress}>
       <Text style={styles.ButtonText}>{name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

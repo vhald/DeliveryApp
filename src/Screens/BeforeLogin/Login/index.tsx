@@ -116,9 +116,9 @@ const LoginScreen = () => {
           <View style={styles.Checkbox}>
             <Text style={styles.Forget}>Forgot Password?</Text>
           </View>
-          <TouchableOpacity onPress={submitForm}>
-            <SubmitButton name="Log In" />
-          </TouchableOpacity>
+          {/* <TouchableOpacity onPress={submitForm}> */}
+          <SubmitButton name="Log In" onPress={() => console.log("hi")} />
+          {/* </TouchableOpacity> */}
           <View style={styles.Division}>
             <View style={styles.Thinline} />
             <Text style={styles.divisionText}>Or Login With</Text>

@@ -1,35 +1,42 @@
 import React from "react";
 import { Text, SafeAreaView, View, TouchableOpacity } from "react-native";
 import { Circletwo, Welcome, Circleone } from "../../../Utils/images";
-// import CreateButton from "../../../Components/CreateButton";
+import CreateButton from "../../../Components/CreateButton";
 import Links from "../../../Components/Links";
 import styles from "./styles";
 import type from "../../../Model/types";
+import SubmitButton from "../../../Components/SubmitButton";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/native";
 
 const WelcomeScreen = (props: type) => {
-  console.log("welcome");
+  const navigation = useNavigation();
 
+  console.log("welcome");
   const ForgotPassword = () => {
     props.navigation.navigate("ForgotScreen");
-  };
-
-  const CreateNewAccount = () => {
-    props.navigation.navigate("SignUpScreen");
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Welcome}>
-        <Welcome width={"100%"} height={"60%"} />
+        <Welcome width={wp(100)} height={hp(60)} />
         <View style={styles.WelcomeText}>
           <Text style={styles.Welcometext1}>Welcome to the App!</Text>
           <View style={styles.WelcomeText}>
             <Text style={styles.Welcometext2}>
-              Create a free account and to get fastest &
+              Create a free account and to get fastest & {"\n"}
+              <Text style={styles.Welcometext3}>safest delivery.</Text>
             </Text>
-            <Text style={styles.Welcometext3}>safest delivery.</Text>
           </View>
         </View>
-        // <CreateButton navigation={CreateNewAccount()} show={false} />
+        <CreateButton
+          onPress={() => {
+            navigation.navigate("SignUpScreen');");
+          }}
+        />
         <View style={styles.Line1} />
         <Text style={styles.Signup}>Or Sign up With</Text>
         <View style={styles.Line2} />
