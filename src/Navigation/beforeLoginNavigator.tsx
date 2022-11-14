@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../Screens/BeforeLogin/Login";
 import SignUpScreen from "../Screens/BeforeLogin/SignUp";
-// import Slider from "../Screens/BeforeLogin/GetStarted";
+import WelcomeScreen from "../Screens/BeforeLogin/GetStarted";
+import ForgotScreen from "../Screens/BeforeLogin/ForgotPassword";
 import OtpScreen from "../Screens/BeforeLogin/OtpScreen";
 import NewPassword from "../Screens/BeforeLogin/NewPassword";
 
@@ -15,12 +15,13 @@ const BeforeLoginNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="SignUpScreen">
-      {/* <BeforeLoginStack.Screen name="SplashScreen" component={Slider} /> */}
-      {/* <BeforeLoginStack.Screen name="LoginScreen" component={LoginScreen} /> */}
-      {/* <BeforeLoginStack.Screen name="SignUpScreen" component={SignUpScreen} /> */}
+      initialRouteName={WelcomeScreen}>
+      <BeforeLoginStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+      <BeforeLoginStack.Screen name="ForgotScreen" component={ForgotScreen} />
+      <BeforeLoginStack.Screen name="LoginScreen" component={LoginScreen} />
+      <BeforeLoginStack.Screen name="SignUpScreen" component={SignUpScreen} />
       <BeforeLoginStack.Screen name="OtpScreen" component={OtpScreen} />
-      {/* <BeforeLoginStack.Screen name="NewPassword" component={NewPassword} /> */}
+      <BeforeLoginStack.Screen name="NewPassword" component={NewPassword} />
     </BeforeLoginStack.Navigator>
   );
 };
