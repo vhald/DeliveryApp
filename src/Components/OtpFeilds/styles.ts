@@ -1,21 +1,21 @@
-/* eslint-disable no-unused-vars */
 import { StyleSheet } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
 export default StyleSheet.create({
-  container: {
-    padding: 15,
+  textFeild: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingLeft: 13,
+    height: hp(15),
+    justifyContent: "space-around",
+    marginBottom: hp(2),
   },
-  Google: {
-    margin: 10,
-  },
-  FaceBook: {
-    margin: 10,
+  textInp: {
+    height: 60,
+    width: 60,
+    fontSize: 25,
+    alignSelf: "center",
+    paddingLeft: wp(2),
   },
 });

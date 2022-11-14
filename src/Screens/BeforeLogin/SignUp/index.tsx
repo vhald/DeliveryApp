@@ -1,21 +1,19 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
-  StyleSheet,
   Text,
-  SafeAreaView,
   View,
   Image,
   Button,
   TouchableOpacity,
-} from 'react-native';
-import {TextInput} from 'react-native-paper';
+  ScrollView,
+} from "react-native";
+import { TextInput } from "react-native-paper";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import styles from './styles';
-import CreateButton from '../../../Components/CreateButton';
+} from "react-native-responsive-screen";
+import styles from "./styles";
+import SubmitButton from "../../../Components/SubmitButton";
 import {
   Group,
   Hide,
@@ -24,208 +22,174 @@ import {
   Unselect,
   FaceBook,
   Google,
-  // FaceBook,
-  // Google,
-} from '../../../Utils/images';
+} from "../../../Utils/images";
+// import {validName, validEmail, validPassword} from '../../../Utils/validator';
+import { useNavigation } from "@react-navigation/native";
+
 const SignUpScreen = () => {
-  const [state, setState] = useState({
-    fullName: '',
-    email: '',
-    password: '',
+  const navigation = useNavigation();
+
+  interface stateprops {
+    fullName: string;
+    email: string;
+    password: string;
+    passwordHidden: boolean;
+    fullNameTestFail: boolean | null;
+    emailTestFail: boolean | null;
+    passwordTestFail: boolean | null;
+  }
+
+  const [toggle, setToggle] = useState(true);
+  const [check, setCheck] = useState(true);
+  const [state, setState] = useState<stateprops>({
+    fullName: "",
+    email: "",
+    password: "",
     passwordHidden: false,
     fullNameTestFail: null,
     emailTestFail: null,
     passwordTestFail: null,
   });
 
-  const onChangeName = text => {
-    setState(prev => ({...prev, fullName: text}));
+  const onChangeName = (text: string) => {
+    setState(prev => ({ ...prev, fullName: text }));
   };
-  const onChangeEmail = text => {
-    setState(prev => ({...prev, email: text}));
+  const onChangeEmail = (text: string) => {
+    setState(prev => ({ ...prev, email: text }));
   };
-  const onChangePassword = text => {
-    setState(prev => ({...prev, password: text}));
+  const onChangePassword = (text: string) => {
+    setState(prev => ({ ...prev, password: text }));
   };
 
-  const submitForm = () => {
-    const fullName = String(state.fullName).trim().toLowerCase();
-    const fullname_test = fullName.length > 2;
-    if (fullName.length === 0) {
-      setState(prev => ({...prev, fullNameTestFail: true}));
+  const toggleFunction = () => {
+    setToggle(!toggle);
+  };
+
+  const toggleCheckbox = () => {
+    setCheck(!check);
+  };
+
+  const validName = (name: string) => {
+    const fullName = String(name).trim().toLowerCase();
+    const fullname_test = fullName.length < 6;
+    if (fullname_test) {
+      setState(prev => ({ ...prev, fullNameTestFail: true }));
       return;
     } else {
-      setState(prev => ({...prev, fullNameTestFail: false}));
+      setState(prev => ({ ...prev, fullNameTestFail: false }));
     }
+  };
 
-    // email validation starts here //
-    const email = String(state.email).trim().toLowerCase();
+  const validEmail = (emailId: string) => {
+    const email = String(emailId).trim().toLowerCase();
     const pattern =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     var email_test = pattern.test(email); // true , false
     if (email_test === false) {
-      setState(prev => ({...prev, emailTestFail: true}));
+      setState(prev => ({ ...prev, emailTestFail: true }));
       return;
     }
     if (email_test) {
-      setState(prev => ({...prev, emailTestFail: false}));
+      setState(prev => ({ ...prev, emailTestFail: false }));
     }
+  };
 
-    // password validation starts here //
-    const password = String(state.password).trim();
+  const validPassword = (pass: string) => {
+    const password = String(pass).trim();
     if (password.length >= 6) {
-      setState(prev => ({...prev, passwordTestFail: false}));
+      setState(prev => ({ ...prev, passwordTestFail: false }));
     } else {
-      setState(prev => ({...prev, passwordTestFail: true}));
+      setState(prev => ({ ...prev, passwordTestFail: true }));
       return;
     }
-    // navigation.navigate('Login')
+  };
+
+  const submitForm = () => {
+    // navigation.navigate("LoginScreen");
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.Group}>
+    <ScrollView style={styles.container}>
+      <View>
         <Group style={styles.GroupImage} height={hp(24)} width={wp(100)} />
         <View style={styles.content}>
           <Text style={styles.SignUpText}>Sign Up</Text>
           <Text style={styles.GroupText}>
             Create a free account and join us!
           </Text>
-          <View
-            style={{
-              justifyContent: 'space-around',
-              height: hp(28),
-              marginTop: 5,
-            }}>
+          <View style={styles.InputFeild}>
             <TextInput
               mode="outlined"
               label="Your Name"
               placeholder="Enter your Name"
               onChangeText={text => onChangeName(text)}
-              value={state.fullname}
-              activeOutlineColor={false ? '#1977F3' : '#D70F0F'} // make it dynamic
-              outlineStyle={{borderRadius: 10}}
+              value={state.fullName}
+              activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
+              outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
-              style={{height: 40}}
-
-              // outlineStyle={{ when validation false -> red}}
+              onBlur={() => validName(state.fullName)}
             />
-            {/* {state.fullnameTestFail === true && ( */}
-            <Text style={{color: 'red', fontSize: 10, paddingLeft: 10}}>
-              invalid name. Min 3 characters required
-            </Text>
-            {/* )} */}
+            {state.fullNameTestFail === true && (
+              <Text style={styles.invalidMsg}>
+                Invalid Name! Min 6 characters required.
+              </Text>
+            )}
             <TextInput
               mode="outlined"
               label="Email"
               placeholder="Enter your e-mail"
               onChangeText={text => onChangeEmail(text)}
               value={state.email}
-              activeOutlineColor="#1977F3"
-              outlineStyle={{borderRadius: 10}}
+              activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
+              outlineStyle={{ borderRadius: 10 }}
               placeholderTextColor="#B9B9B9"
-              style={{height: 40}}
+              onBlur={() => validEmail(state.email)}
+              keyboardType="email-address"
             />
-            {/* {state.emailTestFail === true && ( */}
-            <Text style={{color: 'red', fontSize: 10, paddingLeft: 10}}>
-              invalid email
-            </Text>
-            {/* )} */}
+            {state.emailTestFail === true && (
+              <Text style={styles.invalidMsg}>invalid email</Text>
+            )}
             <TextInput
               mode="outlined"
               label="Password"
               placeholder="Create Password"
-              right={<TextInput.Icon icon={Show} />}
+              right={
+                <TextInput.Icon
+                  onPress={toggleFunction}
+                  icon={toggle ? Hide : Show}
+                />
+              }
               onChangeText={text => onChangePassword(text)}
               value={state.password}
-              secureTextEntry={state.passwordHidden}
-              outlineStyle={{
-                borderRadius: 10,
-              }}
-              activeOutlineColor="#1977F3"
+              outlineStyle={{ borderRadius: 10 }}
+              secureTextEntry={toggle}
+              activeOutlineColor={true ? "#1977F3" : "#D70F0F"} // make it dynamic
               placeholderTextColor="#B9B9B9"
-              style={{height: 40, justifyContent: 'center'}}
+              onBlur={() => validPassword(state.password)}
             />
-            {/* {state.emailTestFail === true && ( */}
-            <Text style={{color: 'red', fontSize: 10, paddingLeft: 10}}>
-              invalid password
-            </Text>
-            {/* )} */}
+            {state.emailTestFail === true && (
+              <Text style={styles.invalidMsg}>invalid password</Text>
+            )}
           </View>
           <View style={styles.Checkbox}>
-            {false ? <Select /> : <Unselect />}
-            <Text style={{fontFamily: 'Lato-Regular', marginLeft: 9}}>
-              By creating an account you agree with all our{'\n '}
-              <Text style={styles.TextLink}>Terms of Service</Text> and our{' '}
+            <TouchableOpacity onPress={() => toggleCheckbox()}>
+              {check ? <Select /> : <Unselect />}
+            </TouchableOpacity>
+            <Text style={styles.Consent}>
+              By creating an account you agree with all our{"\n "}
+              <Text style={styles.TextLink}>Terms of Service</Text> and our{" "}
               <Text style={styles.TextLink}>Privacy Policy</Text>.
             </Text>
           </View>
-          <TouchableOpacity
-            onPress={submitForm}
-            style={{
-              width: wp('95%'),
-              height: hp('6%'),
-              alignItems: 'center',
-              marginLeft: wp(-2),
-              borderRadius: 10,
-              marginTop: hp(0),
-              backgroundColor: '#1977F3',
-            }}>
-            <Text
-              style={{
-                alignItems: 'center',
-                alignContent: 'center',
-                paddingTop: 14,
-                color: '#FFFFFF',
-                fontSize: 14,
-                lineHeight: 16.8,
-                fontFamily: 'Lato-Bold',
-              }}>
-              Create New Account
-            </Text>
+          <TouchableOpacity onPress={submitForm}>
+            <SubmitButton name="Create Account" />
           </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              width: wp(50),
-              alignSelf: 'center',
-              marginTop: 20,
-              color: '#B9B9B9',
-            }}>
-            <View
-              style={{
-                width: 40,
-                height: 0,
-                borderWidth: 0.5,
-                borderColor: '#B9B9B9',
-              }}
-            />
-            <Text
-              style={{
-                color: '#555252',
-                fontFamily: 'Lato-Regular',
-                fontSize: 12,
-                bottom: 8,
-              }}>
-              Or Sign up With
-            </Text>
-            <View
-              style={{
-                width: 40,
-                height: 0,
-                borderWidth: 0.5,
-                borderColor: '#B9B9B9',
-              }}
-            />
+          <View style={styles.Division}>
+            <View style={styles.ThinLine} />
+            <Text style={styles.DivisionText}>Or Sign up With</Text>
+            <View style={styles.ThinLine} />
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              // backgroundColor: 'yellow',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
+          <View style={styles.socialButton}>
             <TouchableOpacity>
               <Google width={wp(40)} />
             </TouchableOpacity>
@@ -233,20 +197,16 @@ const SignUpScreen = () => {
               <FaceBook width={wp(40)} />
             </TouchableOpacity>
           </View>
-          <Text
-            style={{
-              fontFamily: 'Lato-Regular',
-              color: '#818181',
-              fontSize: 12,
-              alignSelf: 'center',
-              marginTop: hp(3),
-            }}>
-            Already have an Account? <Text style={styles.TextLink}>Login</Text>
-          </Text>
+          <TouchableOpacity>
+            <Text style={styles.OtherOption}>
+              Already have an Account?{" "}
+              <Text style={styles.TextLink}>Login</Text>
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
-}
+};
 
 export default SignUpScreen;
