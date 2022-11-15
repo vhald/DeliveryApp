@@ -22,7 +22,7 @@ const WelcomeScreen = (props: type) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Welcome}>
-        <Welcome width={wp(100)} height={hp(60)} />
+        <Welcome width={wp(80)} height={hp(40)} />
         <View style={styles.WelcomeText}>
           <Text style={styles.Welcometext1}>Welcome to the App!</Text>
           <View style={styles.WelcomeText}>
