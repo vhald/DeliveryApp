@@ -15,27 +15,21 @@ import { useNavigation } from "@react-navigation/native";
 const WelcomeScreen = (props: type) => {
   const navigation = useNavigation();
 
-  console.log("welcome");
-  const ForgotPassword = () => {
-    props.navigation.navigate("ForgotScreen");
-  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Welcome}>
-        <Welcome width={wp(80)} height={hp(40)} />
+        <Welcome width={"100%"} height={"60%"} />
         <View style={styles.WelcomeText}>
           <Text style={styles.Welcometext1}>Welcome to the App!</Text>
           <View style={styles.WelcomeText}>
             <Text style={styles.Welcometext2}>
-              Create a free account and to get fastest & {"\n"}
-              <Text style={styles.Welcometext3}>safest delivery.</Text>
+              Create a free account and to get fastest &
             </Text>
+            <Text style={styles.Welcometext3}>safest delivery.</Text>
           </View>
         </View>
         <CreateButton
-          onPress={() => {
-            // navigation.navigate("SignUpScreen');");
-          }}
+          onPress={() => props.navigation.navigate("SignUpScreen")}
         />
         <View style={styles.Line1} />
         <Text style={styles.Signup}>Or Sign up With</Text>
@@ -45,7 +39,8 @@ const WelcomeScreen = (props: type) => {
           <Circletwo style={styles.circle2} />
           <View style={styles.BottomText}>
             <Text style={styles.text2}>Already have an account? </Text>
-            <TouchableOpacity onPress={() => ForgotPassword()}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("LoginScreen")}>
               <Text style={styles.text1}>Login</Text>
             </TouchableOpacity>
           </View>

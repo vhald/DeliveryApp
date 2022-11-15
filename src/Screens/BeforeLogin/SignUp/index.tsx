@@ -111,7 +111,7 @@ const SignUpScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Group style={styles.GroupImage} height={hp(24)} width={wp(100)} />
+        <Group style={styles.GroupImage} height={hp(18)} width={wp(100)} />
         <View style={styles.content}>
           <Text style={styles.SignUpText}>Sign Up</Text>
           <Text style={styles.GroupText}>
@@ -197,7 +197,7 @@ const SignUpScreen = () => {
               <FaceBook width={wp(40)} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
             <Text style={styles.OtherOption}>
               Already have an Account?{" "}
               <Text style={styles.TextLink}>Login</Text>

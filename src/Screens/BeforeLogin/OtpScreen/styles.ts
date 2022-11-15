@@ -86,5 +86,5 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: hp(5),
   },
-  resendText: { fontFamily: "Lato-Regular", color: "#1977F3" },
+  resendText: { fontFamily: "Lato-Regular", color: "#1977F3", fontSize: 12 },
 });

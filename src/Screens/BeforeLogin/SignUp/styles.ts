@@ -5,7 +5,7 @@ import {
 } from "react-native-responsive-screen";
 
 export default StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white" },
+  container: { backgroundColor: "white" },
   GroupImage: {
     marginTop: hp(3),
     alignSelf: "center",

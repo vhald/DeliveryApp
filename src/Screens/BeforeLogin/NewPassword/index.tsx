@@ -14,11 +14,11 @@ import {
 } from "react-native-responsive-screen";
 import styles from "./styles";
 import { NewPass } from "../../../Utils/images";
-import { validEmail, validPassword } from "../../../Utils/validator";
+import { validPassword } from "../../../Utils/validator"; // left
 import SubmitButton from "../../../Components/SubmitButton";
 import { useNavigation } from "@react-navigation/native";
 
-function NewPassword() {
+const NewPassword = () => {
   const navigation = useNavigation();
 
   interface stateprops {
@@ -88,6 +88,6 @@ function NewPassword() {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default NewPassword;

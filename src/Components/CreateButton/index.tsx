@@ -15,8 +15,7 @@ import { useNavigation } from "@react-navigation/native";
  * @returns
  */
 
-const CreateButton = props => {
-  const onPress = props.onPress;
+const CreateButton = () => {
   const navigation = useNavigation();
   return (
     <>

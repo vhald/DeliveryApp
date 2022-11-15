@@ -9,8 +9,11 @@ import styles from "./styles";
 import SubmitButton from "../../../Components/SubmitButton";
 import { Otp } from "../../../Utils/images";
 import OtpFeild from "../../../Components/OtpFeilds";
+import { useNavigation } from "@react-navigation/native";
 
 const OtpScreen = () => {
+  const navigation = useNavigation();
+
   const [state, setState] = useState({});
 
   const onChangeEmail = (text: any) => {
@@ -19,6 +22,7 @@ const OtpScreen = () => {
 
   const submitForm = () => {
     // navigation.navigate('Login')
+    navigation.navigate("NewPassword");
   };
 
   return (
@@ -31,8 +35,8 @@ const OtpScreen = () => {
             Please enter the 4 digit code sent to {"\n"} abc@gmail.com
           </Text>
           <OtpFeild />
-          <TouchableOpacity onPress={submitForm}>
-            <SubmitButton name="Verify" />
+          <TouchableOpacity>
+            <SubmitButton name="Verify" onPress={() => submitForm()} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.resend}>
             <Text style={styles.resendText}>Resend Code</Text>
