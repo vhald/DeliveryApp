@@ -1,19 +1,18 @@
-/* eslint-disable no-unused-vars */
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+} from 'react-native-responsive-screen';
 export default StyleSheet.create({
   container: {
-    padding: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingLeft: 13,
+    padding: hp(2),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: hp(3.5),
   },
   Google: {
-    margin: 10,
+    margin: wp(1),
   },
   FaceBook: {
     margin: 10,
