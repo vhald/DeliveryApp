@@ -15,6 +15,10 @@ import { useNavigation } from "@react-navigation/native";
 const WelcomeScreen = (props: type) => {
   const navigation = useNavigation();
 
+  console.log("welcome");
+  const ForgotPassword = () => {
+    props.navigation.navigate("LoginScreen");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Welcome}>
