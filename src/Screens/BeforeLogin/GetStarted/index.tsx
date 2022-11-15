@@ -34,7 +34,7 @@ const WelcomeScreen = (props: type) => {
         </View>
         <CreateButton
           onPress={() => {
-            navigation.navigate("SignUpScreen');");
+            // navigation.navigate("SignUpScreen');");
           }}
         />
         <View style={styles.Line1} />
