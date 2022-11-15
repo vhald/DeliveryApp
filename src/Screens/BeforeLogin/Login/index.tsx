@@ -17,8 +17,8 @@ import { Login, Hide, Show, FaceBook, Google } from "../../../Utils/images";
 import { validEmail, validPassword } from "../../../Utils/validator";
 import SubmitButton from "../../../Components/SubmitButton";
 import { useNavigation } from "@react-navigation/native";
-
-const LoginScreen = () => {
+import type from '../../../Model/types';
+const LoginScreen = (props: type) => {
   const navigation = useNavigation();
 
   interface stateprops {
@@ -68,6 +68,9 @@ const LoginScreen = () => {
     // navigation.navigate('Login')
   };
 
+  const ForgotPassword = () => {
+    props.navigation.navigate("ForgotScreen");
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -113,9 +116,9 @@ const LoginScreen = () => {
               <Text style={styles.invalidPop}>invalid password</Text>
             )}
           </View>
-          <View style={styles.Checkbox}>
+          <TouchableOpacity style={styles.Checkbox} onPress={() => navigation.navigate('ForgotScreen')}>
             <Text style={styles.Forget}>Forgot Password?</Text>
-          </View>
+          </TouchableOpacity>
           {/* <TouchableOpacity onPress={submitForm}> */}
           <SubmitButton name="Log In" onPress={() => console.log("hi")} />
           {/* </TouchableOpacity> */}

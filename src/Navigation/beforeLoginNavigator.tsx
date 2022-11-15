@@ -17,10 +17,10 @@ const BeforeLoginNavigator = () => {
       }}
       initialRouteName={WelcomeScreen}>
       <BeforeLoginStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      {/* <BeforeLoginStack.Screen name="ForgotScreen" component={ForgotScreen} /> */}
-      {/* <BeforeLoginStack.Screen name="LoginScreen" component={LoginScreen} /> */}
+      <BeforeLoginStack.Screen name="ForgotScreen" component={ForgotScreen} />
+      <BeforeLoginStack.Screen name="LoginScreen" component={LoginScreen} />
       <BeforeLoginStack.Screen name="SignUpScreen" component={SignUpScreen} />
-      {/* <BeforeLoginStack.Screen name="OtpScreen" component={OtpScreen} /> */}
+      <BeforeLoginStack.Screen name="OtpScreen" component={OtpScreen} />
       {/* <BeforeLoginStack.Screen name="NewPassword" component={NewPassword} /> */}
     </BeforeLoginStack.Navigator>
   );

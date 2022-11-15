@@ -17,7 +17,7 @@ const WelcomeScreen = (props: type) => {
 
   console.log("welcome");
   const ForgotPassword = () => {
-    props.navigation.navigate("ForgotScreen");
+    props.navigation.navigate("LoginScreen");
   };
   return (
     <SafeAreaView style={styles.container}>
