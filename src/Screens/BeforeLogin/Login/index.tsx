@@ -6,6 +6,7 @@ import {
   Image,
   Button,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { TextInput } from "react-native-paper";
 import {
@@ -121,7 +122,6 @@ const LoginScreen = (props: type) => {
           </TouchableOpacity>
           {/* <TouchableOpacity onPress={submitForm}> */}
           <SubmitButton name="Log In" onPress={() => console.log("hi")} />
-          {/* </TouchableOpacity> */}
           <View style={styles.Division}>
             <View style={styles.Thinline} />
             <Text style={styles.divisionText}>Or Login With</Text>
@@ -135,9 +135,14 @@ const LoginScreen = (props: type) => {
               <FaceBook width={wp(40)} />
             </TouchableOpacity>
           </View>
-          <Text style={styles.OtherOption}>
-            Don't have an Account? <Text style={styles.TextLink}>SignUp</Text>
-          </Text>
+          <View style={styles.bottom}>
+            <Text style={styles.OtherOption}>Don't have an Account? </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SignUpScreen")}>
+              <Text style={styles.TextLink}>SignUp</Text>
+            </TouchableOpacity>
+          </View>
+          {/* </TouchableOpacity> */}
         </View>
       </View>
     </SafeAreaView>

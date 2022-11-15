@@ -26,7 +26,7 @@ export default StyleSheet.create({
     color: "#666666",
   },
   invalidPop: { color: "red", fontSize: 10, paddingLeft: 10 },
-  Forget: { fontFamily: "Lato-Regular", color: "#1977F3" },
+  Forget: { fontFamily: "Lato-Bold", color: "#1977F3" },
   Division: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -51,6 +51,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    marginBottom: hp(8),
   },
   textFeild: {
     justifyContent: "space-around",
@@ -64,6 +65,8 @@ export default StyleSheet.create({
   },
   TextLink: {
     color: "#1977F3",
+    fontFamily: "Lato-Regular",
+    fontSize: 12,
   },
   Checkbox: {
     marginBottom: wp(7),
@@ -75,7 +78,6 @@ export default StyleSheet.create({
     fontFamily: "Lato-Regular",
     color: "#818181",
     fontSize: 12,
-    alignSelf: "center",
-    marginTop: hp(8),
   },
+  bottom: { flexDirection: "row", alignSelf: "center" },
 });

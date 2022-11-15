@@ -25,15 +25,16 @@ export default StyleSheet.create({
     color: "#373737",
   },
   Welcometext2: {
-    fontSize: 13,
+    fontSize: 14,
     color: "#666666",
-    fontFamily: "Lato-Bold",
+    fontFamily: "Lato-Regular",
   },
   Welcometext3: {
     fontSize: 14,
     color: "#666666",
-    fontFamily: "Lato-Bold",
-    alignSelf: 'center'
+    fontFamily: "Lato-Regular",
+    alignSelf: "center",
+    // top: hp(-2),
   },
   Line1: {
     borderWidth: 1,
@@ -61,6 +62,7 @@ export default StyleSheet.create({
   circle1: {
     marginLeft: wp(8),
     marginTop: hp(2),
+    color: "yellow",
   },
   circle2: {
     marginLeft: wp(-11),
@@ -70,15 +72,15 @@ export default StyleSheet.create({
     alignItems: "center",
     marginTop: hp(15),
     marginLeft: wp(5),
-    fontFamily: "Lato-Bold",
+    fontFamily: "Lato-Regular",
     flexDirection: "row",
   },
   text1: {
     color: "#1977F3",
-    fontFamily: "Lato-Bold",
+    fontFamily: "Lato-Regular",
   },
   text2: {
     color: "#818181",
-    fontFamily: "Lato-Bold",
+    fontFamily: "Lato-Regular",
   },
 });
