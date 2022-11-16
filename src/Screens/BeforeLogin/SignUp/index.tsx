@@ -197,12 +197,13 @@ const SignUpScreen = () => {
               <FaceBook width={wp(40)} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-            <Text style={styles.OtherOption}>
-              Already have an Account?{" "}
+          <Text style={styles.OtherOption}>
+            Already have an Account?{" "}
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginScreen")}>
               <Text style={styles.TextLink}>Login</Text>
-            </Text>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          </Text>
         </View>
       </View>
     </ScrollView>
@@ -210,3 +211,9 @@ const SignUpScreen = () => {
 };
 
 export default SignUpScreen;
+<View style={styles.bottom}>
+  <Text style={styles.OtherOption}>Don't have an Account? </Text>
+  <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+    <Text style={styles.TextLink}>SignUp</Text>
+  </TouchableOpacity>
+</View>;

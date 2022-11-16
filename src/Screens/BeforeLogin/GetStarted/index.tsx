@@ -32,9 +32,7 @@ const WelcomeScreen = (props: type) => {
             <Text style={styles.Welcometext3}>safest delivery.</Text>
           </View>
         </View>
-        <CreateButton
-          onPress={() => props.navigation.navigate("SignUpScreen")}
-        />
+        <CreateButton />
         <View style={styles.Line1} />
         <Text style={styles.Signup}>Or Sign up With</Text>
         <View style={styles.Line2} />
